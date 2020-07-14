@@ -12,9 +12,10 @@ def show():
         print("有女朋友，好开心！")
     else:
         print("单身贵族！")
+    return have_girl
 
 #print(__name__)
 
 if __name__ == '__main__':
     send()
-    show()
+    print(show())
