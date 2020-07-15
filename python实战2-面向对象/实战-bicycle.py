@@ -5,5 +5,28 @@
     2.run（km）方法用于骑行，每骑行10km消耗电量1度，当电量耗尽时调用bicycle的run方法骑行
 通过传入的骑行里程数，显示骑行结果（就是当电量耗尽，需要你真正骑的里程数）
 '''
-class Bicycle():
-    def run(self):
+class Bycycle():
+    def run(self,km):
+        print(f"骑行的里程数:{km}km")
+
+class EBycycle(Bycycle):
+    # 在init中初始化的实例变量，self.battery_level为属性
+    def __init__(self,battery_level):
+        self.battery_level = battery_level
+
+    def fill_charge(self,vol):
+        print(f"充电:{vol}")
+
+    def run(self,km):
+        #每骑行10km消耗电量1度,有10度电，最多骑行10*10=100km
+        max_mile = self.battery_level * 10    #用电骑行最多的里程数
+        leave_mile = km - max_mile            #电量耗尽，自己骑行的里程数
+
+        if leave_mile > 0:
+            print(f"已经使用电量骑行的里程数：{max_mile}km")
+            super().run(leave_mile)
+        else:
+            print(f"骑行的里程数：{km}")
+
+mybycycle = EBycycle(20)
+mybycycle.run(1999)
