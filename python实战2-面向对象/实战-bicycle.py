@@ -5,6 +5,8 @@
     2.run（km）方法用于骑行，每骑行10km消耗电量1度，当电量耗尽时调用bicycle的run方法骑行
 通过传入的骑行里程数，显示骑行结果（就是当电量耗尽，需要你真正骑的里程数）
 '''
+import yaml
+
 class Bycycle():
     def run(self,km):
         print(f"骑行的里程数:{km}km")
@@ -28,5 +30,20 @@ class EBycycle(Bycycle):
         else:
             print(f"骑行的里程数：{km}")
 
-mybycycle = EBycycle(20)
-mybycycle.run(1999)
+if __name__ == "__main__":
+
+    with open("实战-bicycle-yaml.yml") as f:
+        datas = yaml.safe_load(f)
+
+    print(datas)
+
+    my = datas['default']
+    my_battery = my['battery_level']
+    my_km = my['km']
+
+    mybycycle = EBycycle(my_battery)
+    mybycycle.run(my_km)
+
+    # mybycycle1 = EBycycle(10)
+    # mybycycle1.run(19)
+
